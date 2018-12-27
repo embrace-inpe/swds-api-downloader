@@ -1,8 +1,8 @@
 from src.api import APIDownload
 
 if __name__ == '__main__':
-    # Api host address
-    host = 'http://127.0.0.1:8000'
+    # Api host address e.g: http://datashare.ebrace.inpe.br
+    host = ''
     # Search filters
     search = {
         'application': 1,
