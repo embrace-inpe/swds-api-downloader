@@ -17,7 +17,7 @@ class APIDownload:
     token = None
 
     def __init__(self, credentials, host, path='./tmp/', **kwargs):
-        self.path = path
+        self.path = path if path.endswith('/') else path + '/'
         self.host = host
         self.credentials = credentials
         default = dict(
