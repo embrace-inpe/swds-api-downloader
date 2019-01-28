@@ -27,15 +27,32 @@ def initial_msg(size):
     """.format(msg, total))
 
 
-def final_msg(path):
+def final_msg(path, countsuccess, countfail):
     """
     Print the final message
+    :param countfail: An integer value
+    :param countsuccess: An integer value
     :param path: Path to save the files
     :return: Print message
     """
     print("""
 
     *****************************************************
+    Download success: {1}
+    Download Failed: {2} 
+    
+    Done! {1} files are in your path {0}
+    """.format(path, countsuccess, countfail))
 
-    Done! All files are in your path {}
-    """.format(path))
+
+def error_msg(file, error):
+    """
+    Print the error message
+    :param error: Error message
+    :param file: File name
+    :return: Print message
+    """
+    print("""
+    *** Failed: Something went wrong when trying to download the file "{}"
+    *** Error message: {}    
+    """.format(file, error))

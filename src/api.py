@@ -93,7 +93,10 @@ class APIDownload:
         :return: Print download status
         """
         h.initial_msg(len(list_files))
+        countsuccess = 0
+        countfails = 0
         for file in list_files:
+
             _, _, _, _, _, *file_path, file_name = file['url'].split('/')
             file_path = '/'.join(file_path) + '/'
             filename = self.path + file_path + file_name
@@ -102,9 +105,13 @@ class APIDownload:
             request = urllib.request.Request(file['url'])
             request.add_header('Authorization', self.get_token())
             os.makedirs(os.path.dirname(filename), exist_ok=True)
-
-            with urllib.request.urlopen(request) as response, open(filename, 'wb+') as out_file:
-                data = response.read()  # a `bytes` object
-                out_file.write(data)
-        h.final_msg(self.path)
+            try:
+                with urllib.request.urlopen(request) as response, open(filename, 'wb+') as out_file:
+                    data = response.read()  # a `bytes` object
+                    out_file.write(data)
+                    countsuccess = countsuccess + 1
+            except Exception as error:
+                h.error_msg(file_name, error)
+                countfails = countfails + 1
+        h.final_msg(self.path, countsuccess, countfails)
         return exit(0)
