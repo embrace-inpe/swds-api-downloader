@@ -3,6 +3,7 @@ Helpers module to auxiliary functions
 
 """
 import getopt
+import logging
 import sys
 
 
@@ -10,7 +11,7 @@ def initial_msg(size):
     """
     Print the initial message
     :param size: The length of files list
-    :return: Print message
+    :return: message
     """
     if size > 0:
         msg = 'Start Download the files from Space Weather Data Share API'
@@ -19,7 +20,7 @@ def initial_msg(size):
 
     total = 'Total: ' + str(size) + ' file(s)'
 
-    print("""
+    return ("""
     *****************************************************
     
     {}
@@ -35,9 +36,9 @@ def final_msg(path, countsuccess, countfail):
     :param countfail: An integer value
     :param countsuccess: An integer value
     :param path: Path to save the files
-    :return: Print message
+    :return: message
     """
-    print("""
+    return ("""
 
     *****************************************************
     Download success: {1}
@@ -54,14 +55,14 @@ def error_msg(file, error):
     :param file: File name
     :return: Print message
     """
-    print("""
+    return ("""
     *** Failed: Something went wrong when trying to download the file "{}"
     *** Error message: {}    
     """.format(file, error))
 
 
 def help_msg():
-    print("""
+    return ("""
     ** Filters
     
     -a --app = An integer Application ID (Required)
@@ -82,9 +83,9 @@ def help_msg():
     """)
 
 
-def get_sys_args(argv):
+def get_sys_args(argvs):
     try:
-        options, args = getopt.getopt(argv, "hHa:s:r:i:e:p:f:t:n:q:", [
+        options, args = getopt.getopt(argvs, "hHa:s:r:i:e:p:f:t:n:q:", [
             "help",
             "app=",
             "station=",
@@ -98,14 +99,14 @@ def get_sys_args(argv):
             "path="
         ])
     except getopt.GetoptError as error:
-        print(error)
+        logging.info(error)
         sys.exit(2)
 
     search = {}
     for opt, arg in options:
         if opt in ('-h', '-H', '--help'):
-            help_msg()
-            sys.exit()
+            logging.info(help_msg())
+            sys.exit(1)
         elif opt in ("-a", "--app"):
             search['application'] = arg
         elif opt in ("-s", "--station"):
@@ -126,8 +127,11 @@ def get_sys_args(argv):
             search['end_date'] = arg
         elif opt in ('-p', '--path'):
             search['path_to_save'] = arg
-
-    path = search['path_to_save']
-    del search['path_to_save']
+    if 'path_to_save' in search:
+        path = search['path_to_save']
+        del search['path_to_save']
+    else:
+        logging.info('It needs a path to save. Use -p or --path to pass your custom path to save the files')
+        sys.exit(3)
     separator = [search, path]
     return separator
