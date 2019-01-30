@@ -6,15 +6,16 @@ import settings
 import src.utils.helpers as h
 from src.api import APIDownload
 
-if __name__ == '__main__':
+
+def main(argv):
     logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.DEBUG)
 
-    if len(sys.argv) == 1:
+    if len(argv) == 1:
         search = settings.SEARCH
         path_to_save = settings.PATH_TO_SAVE
 
     else:
-        search, path_to_save = h.get_sys_args(sys.argv[1:])
+        search, path_to_save = h.get_sys_args(argv[1:])
 
     host = settings.HOST
 
@@ -26,6 +27,11 @@ if __name__ == '__main__':
     download = APIDownload(credentials=login, host=host, path=path_to_save, **search)
     files = download.get_files_list()
     download.download_files(files)
+
+
+if __name__ == '__main__':
+    main(sys.argv)
+
 
 
 

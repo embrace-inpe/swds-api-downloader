@@ -34,6 +34,13 @@ class APIDownloadTest(TestCase):
         files = self.download.get_files_list()
         self.assertTrue(len(files) > 0)
 
+    def test_download_files_not_exist(self):
+        """Must log info when the download a file fails"""
+        file = [{'url': self.download.host + '/api/download/SJC/2017/NotExist.m'}]
+        with self.assertLogs(level='INFO'):
+            self.download.download_files(file)
+        self._delete_tmp_path()
+
     def test_download_files(self):
         """Must download the file to path"""
         files = self.download.get_files_list()
@@ -44,13 +51,12 @@ class APIDownloadTest(TestCase):
         relative_path = self.download.path + file_name
         tmp_file = Path(relative_path)
         self.assertTrue(tmp_file.exists())
+        self._delete_tmp_path()
+
+    def _delete_tmp_path(self):
         shutil.rmtree(os.path.dirname(os.path.abspath(self.download.path)) + self.download.path[1:])
 
-    def test_download_files_not_exist(self):
-        """Must log info when the download a file fails"""
-        file = [{'url': self.download.host + '/api/download/SJC/2017/NotExist.m'}]
-        with self.assertLogs(level='INFO'):
-            self.download.download_files(file)
+
 
 
 

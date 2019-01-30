@@ -1,4 +1,9 @@
 # Downloading files from Space Weather Data Share API
+![](https://img.shields.io/github/license/embrace-inpe/swds-api-downloader.svg)
+![](https://img.shields.io/badge/python-3-blue.svg)
+![](https://img.shields.io/badge/Version-1.0.2-yellow.svg)
+![](https://img.shields.io/badge/INPE-EMBRACE-orange.svg)
+
 This is a python app sample to help users to automatically download files through Space Weather Data Share API.
 
 
@@ -21,6 +26,8 @@ python swds-downloader.py -a 1 -i 2017-04-01 -e 2017-04-23 -r 1 -s 1 -p ./tmp/ma
 ```
 See the avaliables args:
 ```text
+-h -H --help = Show the helper text with the avaliables options
+
 ** Filters
     
 -a --app = An integer Application ID (Required)
@@ -45,10 +52,6 @@ For run the program without command line args you must edit the `settings.py` fi
 
 - **SEARCH** `(Search parameters)`
 - **PATH_TO_SAVE** `(Path to save the files)`
-- **HOST** `(The Api host address)`
-- **USERNAME** `(The username or e-mail)`
-- **PASSWORD** `(The password)`
-
 
 ```python
 # Search filters
@@ -112,7 +115,13 @@ This page is an example of how to download files from EMBRACE/INPE service (SW D
 
 Testing
 -----------------
-To run the test it needs before set variables in `settings.py` with you personal information then run the command:
+After set  the variables in `settings.py` with you personal information and install the dependences listed in `requirements.txt`:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the command
 ```bash
 python runtests.py
 ```

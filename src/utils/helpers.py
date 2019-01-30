@@ -53,7 +53,7 @@ def error_msg(file, error):
     Print the error message
     :param error: Error message
     :param file: File name
-    :return: Print message
+    :return: message
     """
     return ("""
     *** Failed: Something went wrong when trying to download the file "{}"
@@ -63,6 +63,9 @@ def error_msg(file, error):
 
 def help_msg():
     return ("""
+    
+    -h -H --help = Show the helper text with the avaliables options
+
     ** Filters
     
     -a --app = An integer Application ID (Required)
