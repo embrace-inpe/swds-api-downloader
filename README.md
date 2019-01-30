@@ -1,4 +1,9 @@
 # Downloading files from Space Weather Data Share API
+![](https://img.shields.io/github/license/embrace-inpe/swds-api-downloader.svg)
+![](https://img.shields.io/badge/python-3-blue.svg)
+![](https://img.shields.io/badge/Version-1.0.2-yellow.svg)
+![](https://img.shields.io/badge/INPE-EMBRACE-orange.svg)
+
 This is a python app sample to help users to automatically download files through Space Weather Data Share API.
 
 
@@ -6,7 +11,11 @@ Configuration
 -----------------
 Exist two ways to set the search values, by command line args or setting the variables values in code.
 
-Set the `host` and `login` variables on the code for both cases.
+Set the variables on the `settings.py` for both cases.
+- **HOST** `(The Api host address)`
+- **USERNAME** `(The username or e-mail)`
+- **PASSWORD** `(The password)`
+
 After this you can choice the best way for you use it.
 
 1. ### By Command Line
@@ -17,6 +26,8 @@ python swds-downloader.py -a 1 -i 2017-04-01 -e 2017-04-23 -r 1 -s 1 -p ./tmp/ma
 ```
 See the avaliables args:
 ```text
+-h -H --help = Show the helper text with the avaliables options
+
 ** Filters
     
 -a --app = An integer Application ID (Required)
@@ -37,54 +48,37 @@ See the avaliables args:
 
 
 2. ### Setting Variables in Code
-For run the program without command line args you must edit the `swds-downloader.py` file variables with your personal information:
+For run the program without command line args you must edit the `settings.py` file variables with your personal information:
 
-- **search** `(Search parameters)`
-- **path_to_save** `(Path to save the files)`
+- **SEARCH** `(Search parameters)`
+- **PATH_TO_SAVE** `(Path to save the files)`
 
 ```python
-#! /usr/bin/env python3
-import sys
+# Search filters
+# You must passing these values if aren't using the command line args
+SEARCH = {
+    'application': 1,
+    'start_date': '2017-04-01',
+    'end_date': '2017-04-23',
+    'resolution': 1,
+    'station': 1,
+    'filter': None,
+    'type': None,
+    'network': None,
+    'equipment': None
+}
 
-import src.utils.helpers as h
-from src.api import APIDownload
+# Path to save the files
+PATH_TO_SAVE = './tmp/magnetometer/'
 
-if __name__ == '__main__':
+# The Api host address
+# e.g: http://datashare.ebrace.inpe.br
+HOST = ''
 
-    if len(sys.argv) == 1:
-
-        # Search filters
-        # You must passing these values if aren't using the command line args
-        search = {
-            'application': 1,
-            'start_date': '2017-04-01',
-            'end_date': '2017-04-23',
-            'resolution': 1,
-            'station': 1,
-            'filter': None,
-            'type': None,
-            'network': None,
-            'equipment': None
-        }
-        path_to_save = './tmp/magnetometer/'
-
-    else:
-        search, path_to_save = h.get_sys_args(sys.argv[1:])
-
-    # The Api host address
-    # e.g: http://datashare.ebrace.inpe.br
-    host = ''
-
-    # Credentials
-    # the username key can be your username or e-mail
-    login = {
-        "username": "",
-        "password": ""
-    }
-
-    download = APIDownload(credentials=login, host=host, path=path_to_save, **search)
-    files = download.get_files_list()
-    download.download_files(files)
+# Credentials
+# the username key can be your username or e-mail
+USERNAME = ''
+PASSWORD = ''
 ```
 Then, you can run the program on terminal as following
 
@@ -118,6 +112,19 @@ The console output will show all information about the download stage, e.g.:
 Custom script
 -----------------
 This page is an example of how to download files from EMBRACE/INPE service (SW Data Share). Please, fell free to customize your own script with different applications, dates and filters.
+
+Testing
+-----------------
+After set  the variables in `settings.py` with you personal information and install the dependences listed in `requirements.txt`:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the command
+```bash
+python runtests.py
+```
 
 Help
 -----------------
