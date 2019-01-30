@@ -105,7 +105,7 @@ class APIDownload:
             _, _, _, _, _, *file_path, file_name = file['url'].split('/')
             file_path = '/'.join(file_path) + '/'
             filename = self.path + file_path + file_name
-            logging.info("""   Downloading the file: {} to {}""".format(file_name, filename))
+            logging.info("""   Downloading file: {} to {}""".format(file_name, filename))
 
             request = urllib.request.Request(file['url'])
             request.add_header('Authorization', self.get_authorization())

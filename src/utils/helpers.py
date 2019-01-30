@@ -14,7 +14,7 @@ def initial_msg(size):
     :return: message
     """
     if size > 0:
-        msg = 'Start Download the files from Space Weather Data Share API'
+        msg = 'Starting files download from Space Weather Data Share API'
     else:
         msg = 'This search didn\'t find files from Space Weather Data Share API'
 
@@ -42,7 +42,7 @@ def final_msg(path, countsuccess, countfail):
 
     *****************************************************
     Download success: {1}
-    Download Failed: {2} 
+    Download failed: {2} 
     
     Done! {1} files are in your path {0}
     """.format(path, countsuccess, countfail))
