@@ -1,5 +1,4 @@
 #! /usr/bin/env python3
-import logging
 import sys
 
 import settings
@@ -8,7 +7,7 @@ from src.api import APIDownload
 
 
 def main(argv):
-    logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.DEBUG)
+    h.log_config()
 
     if len(argv) == 1:
         search = settings.SEARCH

@@ -1,9 +1,9 @@
 # Downloading files from Space Weather Data Share API
 [![](https://img.shields.io/github/license/embrace-inpe/swds-api-downloader.svg)](https://github.com/embrace-inpe/swds-api-downloader/blob/master/LICENSE)
 [![](https://img.shields.io/badge/python-3-blue.svg)](https://www.python.org/)
-[![](https://img.shields.io/badge/Version-1.0.2-yellow.svg)](https://github.com/embrace-inpe/swds-api-downloader)
+[![](https://img.shields.io/badge/Version-1.0.3-yellow.svg)](https://github.com/embrace-inpe/swds-api-downloader)
 [![](https://img.shields.io/badge/INPE-EMBRACE-orange.svg)](http://www2.inpe.br/climaespacial/portal/pt/)
-[![](https://img.shields.io/badge/coverage-96%25-green.svg)](https://github.com/embrace-inpe/swds-api-downloader)
+[![](https://img.shields.io/badge/coverage-84%25-green.svg)](https://github.com/embrace-inpe/swds-api-downloader)
 
 This is a python app sample to help users to automatically download files through Space Weather Data Share API.
 
@@ -34,8 +34,8 @@ See the avaliables args:
 -a --app = An integer Application ID (Required)
 -s --station = An integer Station ID (Optional)
 -r --resolution = An integer Resolution ID (Optional)
--f --filter = An integer Filter ID (Optional)
--t --type = An integer Type ID (Optional)
+-f --swfilter = An integer Filter ID (Optional)
+-t --swtype = An integer Type ID (Optional)
 -n --network = An integer Network ID (Optional)
 -q --equipment = An integer Equipment ID (Optional)
 
@@ -61,8 +61,8 @@ SEARCH = {
     'end_date': '2017-04-23',
     'resolution': 1,
     'station': 1,
-    'filter': None,
-    'type': None,
+    'swfilter': None,
+    'swtype': None,
     'network': None,
     'equipment': None
 }
@@ -121,6 +121,11 @@ Then, run the command:
 ```bash
 python runtests.py
 ```
+
+Log
+-----------------
+
+Download errors will be listed in `error.log` on root path.
 
 Help
 -----------------
