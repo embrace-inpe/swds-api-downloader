@@ -85,7 +85,7 @@ Run the program
 
 After configuring you environment, you can run the program with the following command:
 ```bash
-python swds-downloader.py
+python3 swds-downloader.py
 ```
 
 If everything runs fine, you should have a console output like this:
@@ -115,11 +115,11 @@ Testing
 -----------------
 After you have set the variables in `settings.py` with you personal information, you need to install the dependencies listed in `requirements.txt`:
 ```bash
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 Then, run the command:
 ```bash
-python runtests.py
+python3 runtests.py
 ```
 
 Log
