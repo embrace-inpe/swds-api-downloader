@@ -63,17 +63,6 @@ def error_msg(file, error):
     """.format(file, error))
 
 
-def log_error_file_msg(file):
-    """
-    Print the error message when the download has failed
-    :param file: File name
-    :return: message
-    """
-    return ("""
-    *** Failed: Something went wrong when trying to download the file "{}"
-    """.format(file))
-
-
 def help_msg():
     return ("""
     

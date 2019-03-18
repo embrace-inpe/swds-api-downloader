@@ -116,8 +116,7 @@ class APIDownload:
                         out_file.write(data)
                         countsuccess = countsuccess + 1
             except Exception as error:
-                logging.error(h.log_error_file_msg(file_name))
-                logging.info(h.error_msg(file_name, error))
+                logging.error(h.error_msg(file_name, error))
                 countfails = countfails + 1
         logging.info(h.final_msg(self.path, countsuccess, countfails))
 
