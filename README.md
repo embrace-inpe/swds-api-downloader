@@ -70,10 +70,6 @@ SEARCH = {
 # Path to save the files
 PATH_TO_SAVE = './tmp/magnetometer/'
 
-# The API host address
-# e.g: http://datashare.ebrace.inpe.br
-HOST = ''
-
 # Credentials
 # The username key can be your username or e-mail
 USERNAME = ''
