@@ -13,7 +13,6 @@ Configuration
 There is two ways to set the search values, by command line args or setting the variables values in code.
 
 For both cases you need to set the variables on the `settings.py`.
-- **HOST** `(The API host address)`
 - **USERNAME** `(The username or e-mail)`
 - **PASSWORD** `(The password)`
 
