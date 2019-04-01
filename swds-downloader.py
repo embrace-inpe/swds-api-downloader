@@ -16,7 +16,7 @@ def main(argv):
     else:
         search, path_to_save = h.get_sys_args(argv[1:])
 
-    host = settings.HOST
+    host = 'http://www2.inpe.br/climaespacial/SpaceWeatherDataShare'
 
     login = {
         "username": settings.USERNAME,

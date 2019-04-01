@@ -14,7 +14,7 @@ class APIDownloadTest(TestCase):
             "username": settings.USERNAME,
             "password": settings.PASSWORD
         }
-        host = settings.HOST
+        host = "http://www2.inpe.br/climaespacial/SpaceWeatherDataShare"
         self.download = APIDownload(credentials=login, host=host, path=path_to_save, **search)
 
     def test_login(self):
