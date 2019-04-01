@@ -1,9 +1,8 @@
+import json
 import logging
 import os
-import sys
 import urllib.parse
 import urllib.request
-import json
 from urllib.error import URLError
 
 import src.utils.helpers as h
@@ -31,8 +30,8 @@ class APIDownload:
             end_date=None,
             resolution=None,
             station=None,
-            filter=None,
-            type=None,
+            swfilter=None,
+            swtype=None,
             network=None,
             equipment=None
         )
@@ -111,12 +110,13 @@ class APIDownload:
             request.add_header('Authorization', self.get_authorization())
             os.makedirs(os.path.dirname(filename), exist_ok=True)
             try:
-                with urllib.request.urlopen(request) as response, open(filename, 'wb+') as out_file:
-                    data = response.read()  # a `bytes` object
-                    out_file.write(data)
-                    countsuccess = countsuccess + 1
+                with urllib.request.urlopen(request, timeout=30) as response:
+                    with open(filename, 'wb+') as out_file:
+                        data = response.read()  # a `bytes` object
+                        out_file.write(data)
+                        countsuccess = countsuccess + 1
             except Exception as error:
-                logging.info(h.error_msg(file_name, error))
+                logging.error(h.error_msg(file_name, error))
                 countfails = countfails + 1
         logging.info(h.final_msg(self.path, countsuccess, countfails))
 

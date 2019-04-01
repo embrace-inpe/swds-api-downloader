@@ -45,6 +45,8 @@ def final_msg(path, countsuccess, countfail):
     Download failed: {2} 
     
     Done! {1} files are in your path {0}
+    
+    More details about the failed files can be found in: ./error.log
     """.format(path, countsuccess, countfail))
 
 
@@ -71,8 +73,8 @@ def help_msg():
     -a --app = An integer Application ID (Required)
     -s --station = An integer Station ID (Optional)
     -r --resolution = An integer  Resolution ID (Optional)
-    -f --filter = An integer  Filter ID (Optional)
-    -t --type = An integer  Type ID (Optional)
+    -f --swfilter = An integer  SwFilter ID (Optional)
+    -t --swtype = An integer  SwType ID (Optional)
     -n --network = An integer  Network ID (Optional)
     -q --equipment = An integer  Equipment ID (Optional)
 
@@ -93,8 +95,8 @@ def get_sys_args(argvs):
             "app=",
             "station=",
             "resolution=",
-            "filter=",
-            "type=",
+            "swfilter=",
+            "swtype=",
             "network=",
             "equipment="
             "start_date=",
@@ -116,9 +118,9 @@ def get_sys_args(argvs):
             search['station'] = arg
         elif opt in ('-r', '--resolution'):
             search['resolution'] = arg
-        elif opt in ('-f', '--filter'):
+        elif opt in ('-f', '--swfilter'):
             search['swfilter'] = arg
-        elif opt in ('-t', '--type'):
+        elif opt in ('-t', '--swtype'):
             search['swtype'] = arg
         elif opt in ('-n', '--network'):
             search['network'] = arg
@@ -138,3 +140,20 @@ def get_sys_args(argvs):
         sys.exit(3)
     separator = [search, path]
     return separator
+
+
+def log_config():  # pragma: no cover
+    logger = logging.getLogger('')
+    logger.setLevel(logging.DEBUG)
+    formatter = logging.Formatter(fmt="%(asctime)s %(levelname)s: %(message)s",
+                                  datefmt="%Y-%m-%d %H:%M:%S")
+    streamhandler = logging.StreamHandler()
+    streamhandler.setFormatter(formatter)
+    logger.addHandler(streamhandler)
+
+    errorfile = logging.FileHandler('./error.log', 'a')
+    errorfile.setLevel(logging.ERROR)
+    errorfile.setFormatter(formatter)
+
+    logger.addHandler(errorfile)
+    return None

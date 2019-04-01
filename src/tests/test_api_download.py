@@ -14,14 +14,13 @@ class APIDownloadTest(TestCase):
             "username": settings.USERNAME,
             "password": settings.PASSWORD
         }
-        host = settings.HOST
+        host = "http://www2.inpe.br/climaespacial/SpaceWeatherDataShare"
         self.download = APIDownload(credentials=login, host=host, path=path_to_save, **search)
 
     def test_login(self):
         """The login must return a token"""
         token = self.download.get_token()
         self.assertIsInstance(token, str)
-        self.assertEqual(len(token), 200)
 
     def test_token_format(self):
         """The token needs be with a Bearer prefix"""
@@ -33,32 +32,3 @@ class APIDownloadTest(TestCase):
         """Must return a files urls list"""
         files = self.download.get_files_list()
         self.assertTrue(len(files) > 0)
-
-    def test_download_files_not_exist(self):
-        """Must log info when the download a file fails"""
-        file = [{'url': self.download.host + '/api/download/SJC/2017/NotExist.m'}]
-        with self.assertLogs(level='INFO'):
-            self.download.download_files(file)
-        self._delete_tmp_path()
-
-    def test_download_files(self):
-        """Must download the file to path"""
-        files = self.download.get_files_list()
-        file = [files[0]]
-        file_name = '/'.join(files[0]['url'].split('/')[-3:])
-        self.download.download_files(file)
-        from pathlib import Path
-        relative_path = self.download.path + file_name
-        tmp_file = Path(relative_path)
-        self.assertTrue(tmp_file.exists())
-        self._delete_tmp_path()
-
-    def _delete_tmp_path(self):
-        shutil.rmtree(os.path.dirname(os.path.abspath(self.download.path)) + self.download.path[1:])
-
-
-
-
-
-
-

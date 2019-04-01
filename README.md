@@ -1,9 +1,9 @@
 # Downloading files from Space Weather Data Share API
 [![](https://img.shields.io/github/license/embrace-inpe/swds-api-downloader.svg)](https://github.com/embrace-inpe/swds-api-downloader/blob/master/LICENSE)
 [![](https://img.shields.io/badge/python-3-blue.svg)](https://www.python.org/)
-[![](https://img.shields.io/badge/Version-1.0.2-yellow.svg)](https://github.com/embrace-inpe/swds-api-downloader)
+[![](https://img.shields.io/badge/Version-1.0.3-yellow.svg)](https://github.com/embrace-inpe/swds-api-downloader)
 [![](https://img.shields.io/badge/INPE-EMBRACE-orange.svg)](http://www2.inpe.br/climaespacial/portal/pt/)
-[![](https://img.shields.io/badge/coverage-96%25-green.svg)](https://github.com/embrace-inpe/swds-api-downloader)
+[![](https://img.shields.io/badge/coverage-84%25-green.svg)](https://github.com/embrace-inpe/swds-api-downloader)
 
 This is a python app sample to help users to automatically download files through Space Weather Data Share API.
 
@@ -34,8 +34,8 @@ See the avaliables args:
 -a --app = An integer Application ID (Required)
 -s --station = An integer Station ID (Optional)
 -r --resolution = An integer Resolution ID (Optional)
--f --filter = An integer Filter ID (Optional)
--t --type = An integer Type ID (Optional)
+-f --swfilter = An integer Filter ID (Optional)
+-t --swtype = An integer Type ID (Optional)
 -n --network = An integer Network ID (Optional)
 -q --equipment = An integer Equipment ID (Optional)
 
@@ -61,18 +61,14 @@ SEARCH = {
     'end_date': '2017-04-23',
     'resolution': 1,
     'station': 1,
-    'filter': None,
-    'type': None,
+    'swfilter': None,
+    'swtype': None,
     'network': None,
     'equipment': None
 }
 
 # Path to save the files
 PATH_TO_SAVE = './tmp/magnetometer/'
-
-# The API host address
-# e.g: http://datashare.ebrace.inpe.br
-HOST = ''
 
 # Credentials
 # The username key can be your username or e-mail
@@ -85,7 +81,7 @@ Run the program
 
 After configuring you environment, you can run the program with the following command:
 ```bash
-python swds-downloader.py
+python3 swds-downloader.py
 ```
 
 If everything runs fine, you should have a console output like this:
@@ -115,12 +111,17 @@ Testing
 -----------------
 After you have set the variables in `settings.py` with you personal information, you need to install the dependencies listed in `requirements.txt`:
 ```bash
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 Then, run the command:
 ```bash
-python runtests.py
+python3 runtests.py
 ```
+
+Log
+-----------------
+
+Download errors will be listed in `error.log` on root path.
 
 Help
 -----------------

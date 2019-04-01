@@ -1,5 +1,4 @@
 #! /usr/bin/env python3
-import logging
 import sys
 
 import settings
@@ -8,7 +7,7 @@ from src.api import APIDownload
 
 
 def main(argv):
-    logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.DEBUG)
+    h.log_config()
 
     if len(argv) == 1:
         search = settings.SEARCH
@@ -17,7 +16,7 @@ def main(argv):
     else:
         search, path_to_save = h.get_sys_args(argv[1:])
 
-    host = settings.HOST
+    host = 'http://www2.inpe.br/climaespacial/SpaceWeatherDataShare'
 
     login = {
         "username": settings.USERNAME,
