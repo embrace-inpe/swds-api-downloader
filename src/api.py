@@ -101,7 +101,7 @@ class APIDownload:
         countfails = 0
         for file in list_files:
 
-            _, _, _, _, _, *file_path, file_name = file['url'].split('/')
+            _, _, _, _, _, _, _, *file_path, file_name = file['url'].split('/')
             file_path = '/'.join(file_path) + '/'
             filename = self.path + file_path + file_name
             logging.info("""   Downloading file: {} to {}""".format(file_name, filename))
